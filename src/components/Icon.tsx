@@ -35,9 +35,9 @@ export interface BaseIconProps<T>
   fill?: string;
 
   /**
-   * Custom icon main
+   * Custom icon component
    */
-  main?: ReactNode;
+  component?: ReactNode;
 }
 
 /**

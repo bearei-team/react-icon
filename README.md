@@ -8,15 +8,15 @@ A basic icon component that supports react and native react.
 
 ## Parameters
 
-| Name            |                     Type | Required | Description               |
-| :-------------- | -----------------------: | -------: | :------------------------ |
-| size            | 'small','medium','large' |        ✘ | Set the icon size         |
-| width           |            string,number |        ✘ | Set the width of the icon |
-| height          |            string,number |        ✘ | Set the icon height       |
-| fill            |                   string |        ✘ | Set the icon fill color   |
-| component       |          React.ReactNode |        ✘ | Custom icon component     |
-| renderMain      |          function(props) |        ✘ | Render the icon main      |
-| renderContainer |  function(props,element) |        ✘ | Render the icon container |
+| Name            |                     Type | Required | Description                       |
+| :-------------- | -----------------------: | -------: | :-------------------------------- |
+| size            | 'small','medium','large' |        ✘ | Set the icon size                 |
+| width           |            string,number |        ✘ | Set the width of the icon         |
+| height          |            string,number |        ✘ | Set the icon height               |
+| fill            |                   string |        ✘ | Set the icon fill color           |
+| content         |          React.ReactNode |        ✘ | The main area content of the icon |
+| renderMain      |          function(props) |        ✘ | Render the icon main              |
+| renderContainer |  function(props,element) |        ✘ | Render the icon container         |
 
 ## Use
 

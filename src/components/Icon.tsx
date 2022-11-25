@@ -33,6 +33,11 @@ export interface BaseIconProps<T>
    * Set the icon fill color
    */
   fill?: string;
+
+  /**
+   * Custom icon main
+   */
+  main?: ReactNode;
 }
 
 /**
@@ -76,9 +81,9 @@ export type IconMainProps<T> = IconChildrenProps<T>;
  */
 export type IconContainerProps<T> = Pick<IconProps<T>, 'ref'> & IconChildrenProps<T>;
 
-function Icon<T>({ref, renderMain, renderContainer, ...args}: IconProps<T>) {
+function Icon<T>({ref, renderMain, renderContainer, ...props}: IconProps<T>) {
   const id = useId();
-  const childrenProps = {...args, id, handleEvent};
+  const childrenProps = {...props, id, handleEvent};
   const mainElement = <>{renderMain?.(childrenProps)}</>;
   const containerElement = (
     <>{renderContainer?.({...childrenProps, ref}, mainElement) ?? mainElement}</>

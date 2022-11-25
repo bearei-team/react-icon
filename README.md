@@ -14,6 +14,7 @@ A basic icon component that supports react and native react.
 | width           |            string,number |        ✘ | Set the width of the icon |
 | height          |            string,number |        ✘ | Set the icon height       |
 | fill            |                   string |        ✘ | Set the icon height       |
+| main            |          React.ReactNode |        ✘ | Custom icon main          |
 | renderMain      |          function(props) |        ✘ | Render the icon main      |
 | renderContainer |  function(props,element) |        ✘ | Render the icon container |
 

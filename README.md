@@ -26,7 +26,7 @@ import Icon from '@bearei/react-icon';
 
 const icon = (
   <Icon
-    renderMain={({title}) => <div data-cy="icon">{title}</div>}
+    renderMain={() => <i data-cy="icon">{'icon'}</i>}
     renderContainer={({id}, element) => (
       <div data-cy="container" data-id={id} tabIndex={1}>
         {element}

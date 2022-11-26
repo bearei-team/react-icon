@@ -8,15 +8,15 @@ A basic icon component that supports react and native react.
 
 ## Parameters
 
-| Name            |                     Type | Required | Description                       |
-| :-------------- | -----------------------: | -------: | :-------------------------------- |
-| size            | 'small','medium','large' |        ✘ | Set the icon size                 |
-| width           |            string,number |        ✘ | Set the width of the icon         |
-| height          |            string,number |        ✘ | Set the icon height               |
-| fill            |                   string |        ✘ | Set the icon fill color           |
-| content         |          React.ReactNode |        ✘ | The main area content of the icon |
-| renderMain      |          function(props) |        ✘ | Render the icon main              |
-| renderContainer |  function(props,element) |        ✘ | Render the icon container         |
+| Name | Type | Required | Description |
+| :-- | --: | --: | :-- |
+| size | `small` `medium` `large` | ✘ | Set the icon size |
+| width | `string` `number` | ✘ | Set the width of the icon |
+| height | `string` `number` | ✘ | Set the icon height |
+| fill | `string` | ✘ | Set the icon fill color |
+| content | `ReactNode` | ✘ | The main area content of the icon |
+| renderMain | `(props: IconMainProps) => ReactNode` | ✘ | Render the icon main |
+| renderContainer | `(props: IconContainerProps) => ReactNode` | ✘ | Render the icon container |
 
 ## Use
 
@@ -27,10 +27,10 @@ import Icon from '@bearei/react-icon';
 
 const icon = (
   <Icon
-    renderMain={() => <i data-cy="icon">{'icon'}</i>}
-    renderContainer={({id}, element) => (
-      <div data-cy="container" data-id={id} tabIndex={1}>
-        {element}
+    renderMain={() => <i>{'icon'}</i>}
+    renderContainer={({id, children}) => (
+      <div data-id={id} tabIndex={1}>
+        {children}
       </div>
     )}
   />

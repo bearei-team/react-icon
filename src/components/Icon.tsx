@@ -1,17 +1,14 @@
-import {useId} from 'react';
-import type {DetailedHTMLProps, HTMLAttributes, ReactNode, Ref} from 'react';
-import type {ViewProps} from 'react-native';
-import handleEvent from '@bearei/react-util/lib/event';
 import type {HandleEvent} from '@bearei/react-util/lib/event';
+import handleEvent from '@bearei/react-util/lib/event';
+import type {DetailedHTMLProps, HTMLAttributes, ReactNode, Ref} from 'react';
+import {useId} from 'react';
+import type {ViewProps} from 'react-native';
 
 /**
  * Base icon props
  */
 export interface BaseIconProps<T>
-  extends Omit<DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> & ViewProps, 'ref'> {
-  /**
-   * Custom icon ref
-   */
+  extends Omit<DetailedHTMLProps<HTMLAttributes<T>, T> & ViewProps, ''> {
   ref?: Ref<T>;
 
   /**
@@ -52,7 +49,7 @@ export interface IconProps<T> extends BaseIconProps<T> {
   /**
    * Render the icon container
    */
-  renderContainer?: (props: IconContainerProps<T>, element?: ReactNode) => ReactNode;
+  renderContainer?: (props: IconContainerProps<T>) => ReactNode;
 }
 
 /**
@@ -61,9 +58,10 @@ export interface IconProps<T> extends BaseIconProps<T> {
 export interface IconChildrenProps<T>
   extends Omit<IconProps<T>, 'renderContainer' | 'renderMain' | 'ref'> {
   /**
-   * Unique ID of icon component
+   * The unique ID of the component
    */
   id: string;
+  children?: ReactNode;
 
   /**
    * Used to handle some common default events
@@ -71,25 +69,16 @@ export interface IconChildrenProps<T>
   handleEvent: HandleEvent;
 }
 
-/**
- * Icon main props
- */
 export type IconMainProps<T> = IconChildrenProps<T>;
-
-/**
- * Icon container props
- */
 export type IconContainerProps<T> = Pick<IconProps<T>, 'ref'> & IconChildrenProps<T>;
 
 function Icon<T>({ref, renderMain, renderContainer, ...props}: IconProps<T>) {
   const id = useId();
   const childrenProps = {...props, id, handleEvent};
-  const mainElement = <>{renderMain?.(childrenProps)}</>;
-  const containerElement = (
-    <>{renderContainer?.({...childrenProps, ref}, mainElement) ?? mainElement}</>
-  );
+  const main = renderMain?.(childrenProps);
+  const container = renderContainer?.({...childrenProps, children: main, ref}) ?? main;
 
-  return <>{containerElement}</>;
+  return <>{container}</>;
 }
 
 export default Icon;

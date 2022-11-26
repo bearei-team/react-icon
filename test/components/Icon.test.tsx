@@ -1,16 +1,16 @@
 import '@testing-library/jest-dom';
-import {render} from '../utils/testUtils';
-import Icon from '../../src/components/Icon';
 import React from 'react';
+import Icon from '../../src/components/Icon';
+import {render} from '../utils/testUtils';
 
 describe('test/components/Icon.test.ts', () => {
   test('It should be a render icon', async () => {
     const {getByDataCy} = render(
       <Icon
         renderMain={() => <i data-cy="icon">{'icon'}</i>}
-        renderContainer={({id}, element) => (
+        renderContainer={({id, children}) => (
           <div data-cy="container" data-id={id} tabIndex={1}>
-            {element}
+            {children}
           </div>
         )}
       />,

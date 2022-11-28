@@ -55,8 +55,7 @@ export interface IconProps<T, E> extends BaseIconProps<T, E> {
 /**
  * Icon children props
  */
-export interface IconChildrenProps<T, E>
-  extends Omit<IconProps<T, E>, 'renderContainer' | 'renderMain' | 'ref'> {
+export interface IconChildrenProps<T, E> extends Omit<BaseIconProps<T, E>, 'ref'> {
   /**
    * The unique ID of the component
    */
@@ -70,7 +69,7 @@ export interface IconChildrenProps<T, E>
 }
 
 export type IconMainProps<T, E> = IconChildrenProps<T, E>;
-export type IconContainerProps<T, E> = Pick<IconProps<T, E>, 'ref'> & IconChildrenProps<T, E>;
+export type IconContainerProps<T, E> = IconChildrenProps<T, E> & Pick<BaseIconProps<T, E>, 'ref'>;
 
 function Icon<T, E = React.MouseEvent<T, MouseEvent>>({
   ref,

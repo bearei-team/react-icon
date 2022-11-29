@@ -1,6 +1,6 @@
 # react-icon
 
-A basic icon component that supports react and native react.
+Base icon components that support React and React native
 
 ## Installation
 

@@ -9,6 +9,9 @@ import type {ViewProps} from 'react-native';
  */
 export interface BaseIconProps<T, E>
   extends Omit<DetailedHTMLProps<HTMLAttributes<T>, T> & ViewProps, ''> {
+  /**
+   * Custom ref
+   */
   ref?: Ref<T>;
 
   /**
@@ -57,7 +60,7 @@ export interface IconProps<T, E> extends BaseIconProps<T, E> {
  */
 export interface IconChildrenProps<T, E> extends Omit<BaseIconProps<T, E>, 'ref'> {
   /**
-   * The unique ID of the component
+   * Component unique ID
    */
   id: string;
   children?: ReactNode;

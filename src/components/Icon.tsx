@@ -71,10 +71,12 @@ export interface IconChildrenProps<T, E> extends Omit<BaseIconProps<T, E>, 'ref'
   handleEvent: HandleEvent;
 }
 
+export type IconClickEvent<T> = React.MouseEvent<T, MouseEvent>;
+
 export type IconMainProps<T, E> = IconChildrenProps<T, E>;
 export type IconContainerProps<T, E> = IconChildrenProps<T, E> & Pick<BaseIconProps<T, E>, 'ref'>;
 
-function Icon<T, E = React.MouseEvent<T, MouseEvent>>({
+function Icon<T, E = IconClickEvent<T>>({
   ref,
   renderMain,
   renderContainer,

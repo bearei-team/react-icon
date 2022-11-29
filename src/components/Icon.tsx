@@ -7,8 +7,11 @@ import type {ViewProps} from 'react-native';
 /**
  * Base icon props
  */
-export interface BaseIconProps<T>
+export interface BaseIconProps<T, E>
   extends Omit<DetailedHTMLProps<HTMLAttributes<T>, T> & ViewProps, ''> {
+  /**
+   * Custom ref
+   */
   ref?: Ref<T>;
 
   /**
@@ -40,25 +43,24 @@ export interface BaseIconProps<T>
 /**
  * Icon props
  */
-export interface IconProps<T> extends BaseIconProps<T> {
+export interface IconProps<T, E> extends BaseIconProps<T, E> {
   /**
    * Render the icon main
    */
-  renderMain?: (props: IconMainProps<T>) => ReactNode;
+  renderMain?: (props: IconMainProps<T, E>) => ReactNode;
 
   /**
    * Render the icon container
    */
-  renderContainer?: (props: IconContainerProps<T>) => ReactNode;
+  renderContainer?: (props: IconContainerProps<T, E>) => ReactNode;
 }
 
 /**
  * Icon children props
  */
-export interface IconChildrenProps<T>
-  extends Omit<IconProps<T>, 'renderContainer' | 'renderMain' | 'ref'> {
+export interface IconChildrenProps<T, E> extends Omit<BaseIconProps<T, E>, 'ref'> {
   /**
-   * The unique ID of the component
+   * Component unique ID
    */
   id: string;
   children?: ReactNode;
@@ -69,10 +71,15 @@ export interface IconChildrenProps<T>
   handleEvent: HandleEvent;
 }
 
-export type IconMainProps<T> = IconChildrenProps<T>;
-export type IconContainerProps<T> = Pick<IconProps<T>, 'ref'> & IconChildrenProps<T>;
+export type IconMainProps<T, E> = IconChildrenProps<T, E>;
+export type IconContainerProps<T, E> = IconChildrenProps<T, E> & Pick<BaseIconProps<T, E>, 'ref'>;
 
-function Icon<T>({ref, renderMain, renderContainer, ...props}: IconProps<T>) {
+function Icon<T, E = React.MouseEvent<T, MouseEvent>>({
+  ref,
+  renderMain,
+  renderContainer,
+  ...props
+}: IconProps<T, E>) {
   const id = useId();
   const childrenProps = {...props, id, handleEvent};
   const main = renderMain?.(childrenProps);

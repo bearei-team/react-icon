@@ -1,5 +1,3 @@
-import type {HandleEvent} from '@bearei/react-util/lib/event';
-import handleEvent from '@bearei/react-util/lib/event';
 import type {DetailedHTMLProps, HTMLAttributes, ReactNode, Ref} from 'react';
 import {useId} from 'react';
 import type {ViewProps} from 'react-native';
@@ -7,7 +5,7 @@ import type {ViewProps} from 'react-native';
 /**
  * Base icon props
  */
-export interface BaseIconProps<T, E>
+export interface BaseIconProps<T = HTMLElement>
   extends Omit<DetailedHTMLProps<HTMLAttributes<T>, T> & ViewProps, ''> {
   /**
    * Custom ref
@@ -43,51 +41,45 @@ export interface BaseIconProps<T, E>
 /**
  * Icon props
  */
-export interface IconProps<T, E> extends BaseIconProps<T, E> {
+export interface IconProps<T> extends BaseIconProps<T> {
   /**
    * Render the icon main
    */
-  renderMain?: (props: IconMainProps<T, E>) => ReactNode;
+  renderMain?: (props: IconMainProps) => ReactNode;
 
   /**
    * Render the icon container
    */
-  renderContainer?: (props: IconContainerProps<T, E>) => ReactNode;
+  renderContainer?: (props: IconContainerProps) => ReactNode;
 }
 
 /**
  * Icon children props
  */
-export interface IconChildrenProps<T, E> extends Omit<BaseIconProps<T, E>, 'ref'> {
+export interface IconChildrenProps extends Omit<BaseIconProps, 'ref'> {
   /**
    * Component unique ID
    */
   id: string;
   children?: ReactNode;
-
-  /**
-   * Used to handle some common default events
-   */
-  handleEvent: HandleEvent;
 }
 
-export type IconClickEvent<T> = React.MouseEvent<T, MouseEvent>;
+export type IconMainProps = IconChildrenProps;
+export type IconContainerProps = IconChildrenProps & Pick<BaseIconProps, 'ref'>;
 
-export type IconMainProps<T, E> = IconChildrenProps<T, E>;
-export type IconContainerProps<T, E> = IconChildrenProps<T, E> & Pick<BaseIconProps<T, E>, 'ref'>;
-
-function Icon<T, E = IconClickEvent<T>>({
+const Icon = <T extends HTMLElement>({
   ref,
   renderMain,
   renderContainer,
   ...props
-}: IconProps<T, E>) {
+}: IconProps<T>) => {
   const id = useId();
-  const childrenProps = {...props, id, handleEvent};
+  const childrenProps = {...props, id};
   const main = renderMain?.(childrenProps);
-  const container = renderContainer?.({...childrenProps, children: main, ref}) ?? main;
+  const content = <>{main}</>;
+  const container = renderContainer?.({...childrenProps, children: content, ref});
 
   return <>{container}</>;
-}
+};
 
 export default Icon;

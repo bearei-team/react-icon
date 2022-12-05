@@ -50,7 +50,7 @@ export interface IconProps<T> extends BaseIconProps<T> {
   /**
    * Render the icon container
    */
-  renderContainer?: (props: IconContainerProps) => ReactNode;
+  renderContainer?: (props: IconContainerProps<T>) => ReactNode;
 }
 
 /**
@@ -65,7 +65,7 @@ export interface IconChildrenProps extends Omit<BaseIconProps, 'ref'> {
 }
 
 export type IconMainProps = IconChildrenProps;
-export type IconContainerProps = IconChildrenProps & Pick<BaseIconProps, 'ref'>;
+export type IconContainerProps<T> = IconChildrenProps & Pick<BaseIconProps<T>, 'ref'>;
 
 const Icon = <T extends HTMLElement>({
   ref,

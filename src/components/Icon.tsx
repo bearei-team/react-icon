@@ -13,27 +13,27 @@ export interface BaseIconProps<T = HTMLElement>
   ref?: Ref<T>;
 
   /**
-   * Set the icon size
+   * Icon size
    */
   size?: 'small' | 'medium' | 'large';
 
   /**
-   * Set the width of the icon
+   * Icon width
    */
   width?: string | number;
 
   /**
-   * Set the icon height
+   * Icon height
    */
   height?: string | number;
 
   /**
-   * Set the icon fill color
+   * Icon fill color
    */
   fill?: string;
 
   /**
-   * The main area content of the icon
+   * Icon content
    */
   content?: ReactNode;
 }

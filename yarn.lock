@@ -1519,7 +1519,7 @@ __metadata:
     "@babel/core": ^7.20.2
     "@babel/preset-env": ^7.20.2
     "@babel/preset-react": ^7.18.6
-    "@bearei/react-util": ^0.0.15
+    "@bearei/react-util": ^0.0.22
     "@testing-library/dom": ^8.19.0
     "@testing-library/jest-dom": ^5.16.5
     "@testing-library/react": ^13.4.0
@@ -1562,12 +1562,12 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@bearei/react-util@npm:^0.0.15":
-  version: 0.0.15
-  resolution: "@bearei/react-util@npm:0.0.15"
+"@bearei/react-util@npm:^0.0.22":
+  version: 0.0.22
+  resolution: "@bearei/react-util@npm:0.0.22"
   dependencies:
     react: ^18.2.0
-  checksum: 17701971503a42ab0996624d0f488bfbc38fc8bf7ad12237d7c70c1d5c263609ac5fd35b6bb64ad2afc9654b132e75ac633f85e292bd4b466c6af30a75fa79a3
+  checksum: a234831c978a87c307d2a4e6244e18c1e47b5a9fdc82ce96c560f7db6bf8af94a59c496a35d027ec9b9a9ea0a3665d57f14d1b6c0e421332c6030292df29dda3
   languageName: node
   linkType: hard
 

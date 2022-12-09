@@ -15,8 +15,8 @@ Base icon components that support React and React native
 | height | `string` `number` | ✘ | Icon height |
 | fill | `string` | ✘ | Icon fill color |
 | content | `ReactNode` | ✘ | Icon content |
-| renderMain | `(props: IconMainProps) => ReactNode` | ✘ | Render the icon main |
-| renderContainer | `(props: IconContainerProps) => ReactNode` | ✘ | Render the icon container |
+| renderMain | `(props: IconMainProps) => ReactNode` | ✔ | Render the icon main |
+| renderContainer | `(props: IconContainerProps) => ReactNode` | ✔ | Render the icon container |
 
 ## Use
 

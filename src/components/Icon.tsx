@@ -6,7 +6,7 @@ import type {ViewProps} from 'react-native';
  * Base icon props
  */
 export interface BaseIconProps<T = HTMLElement>
-  extends Omit<DetailedHTMLProps<HTMLAttributes<T>, T> & ViewProps, ''> {
+  extends Partial<DetailedHTMLProps<HTMLAttributes<T>, T> & ViewProps> {
   /**
    * Custom ref
    */
@@ -45,12 +45,12 @@ export interface IconProps<T> extends BaseIconProps<T> {
   /**
    * Render the icon main
    */
-  renderMain?: (props: IconMainProps) => ReactNode;
+  renderMain: (props: IconMainProps<T>) => ReactNode;
 
   /**
    * Render the icon container
    */
-  renderContainer?: (props: IconContainerProps<T>) => ReactNode;
+  renderContainer: (props: IconContainerProps) => ReactNode;
 }
 
 /**
@@ -64,8 +64,8 @@ export interface IconChildrenProps extends Omit<BaseIconProps, 'ref'> {
   children?: ReactNode;
 }
 
-export type IconMainProps = IconChildrenProps;
-export type IconContainerProps<T> = IconChildrenProps & Pick<BaseIconProps<T>, 'ref'>;
+export type IconMainProps<T> = IconChildrenProps & Pick<BaseIconProps<T>, 'ref'>;
+export type IconContainerProps = IconChildrenProps;
 
 const Icon = <T extends HTMLElement>({
   ref,
@@ -75,9 +75,8 @@ const Icon = <T extends HTMLElement>({
 }: IconProps<T>) => {
   const id = useId();
   const childrenProps = {...props, id};
-  const main = renderMain?.(childrenProps);
-  const content = <>{main}</>;
-  const container = renderContainer?.({...childrenProps, children: content, ref});
+  const main = renderMain({...childrenProps, ref});
+  const container = renderContainer({...childrenProps, children: main});
 
   return <>{container}</>;
 };

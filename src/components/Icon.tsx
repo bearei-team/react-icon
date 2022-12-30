@@ -1,11 +1,11 @@
-import type {DetailedHTMLProps, HTMLAttributes, ReactNode, Ref} from 'react';
-import {useId} from 'react';
-import type {ViewProps} from 'react-native';
+import type { DetailedHTMLProps, HTMLAttributes, ReactNode, Ref } from 'react';
+import { useId } from 'react';
+import type { ViewProps } from 'react-native';
 
 /**
  * Base icon props
  */
-export interface BaseIconProps<T = HTMLElement>
+export interface BaseIconProps<T>
   extends Partial<DetailedHTMLProps<HTMLAttributes<T>, T> & ViewProps> {
   /**
    * Custom ref
@@ -50,13 +50,13 @@ export interface IconProps<T> extends BaseIconProps<T> {
   /**
    * Render the icon container
    */
-  renderContainer: (props: IconContainerProps) => ReactNode;
+  renderContainer: (props: IconContainerProps<T>) => ReactNode;
 }
 
 /**
  * Icon children props
  */
-export interface IconChildrenProps extends Omit<BaseIconProps, 'ref'> {
+export interface IconChildrenProps<T> extends Omit<BaseIconProps<T>, 'ref'> {
   /**
    * Component unique ID
    */
@@ -64,19 +64,21 @@ export interface IconChildrenProps extends Omit<BaseIconProps, 'ref'> {
   children?: ReactNode;
 }
 
-export type IconMainProps<T> = IconChildrenProps & Pick<BaseIconProps<T>, 'ref'>;
-export type IconContainerProps = IconChildrenProps;
+export type IconMainProps<T> = IconChildrenProps<T> &
+  Pick<BaseIconProps<T>, 'ref'>;
 
-const Icon = <T extends HTMLElement>({
+export type IconContainerProps<T> = IconChildrenProps<T>;
+
+const Icon = <T extends HTMLElement = HTMLElement>({
   ref,
   renderMain,
   renderContainer,
   ...props
 }: IconProps<T>) => {
   const id = useId();
-  const childrenProps = {...props, id};
-  const main = renderMain({...childrenProps, ref});
-  const container = renderContainer({...childrenProps, children: main});
+  const childrenProps = { ...props, id };
+  const main = renderMain({ ...childrenProps, ref });
+  const container = renderContainer({ ...childrenProps, children: main });
 
   return <>{container}</>;
 };

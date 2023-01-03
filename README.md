@@ -28,7 +28,7 @@ import Icon from '@bearei/react-icon';
 const icon = (
   <Icon
     renderMain={() => <i>{'icon'}</i>}
-    renderContainer={({id, children}) => (
+    renderContainer={({ id, children }) => (
       <div data-id={id} tabIndex={1}>
         {children}
       </div>

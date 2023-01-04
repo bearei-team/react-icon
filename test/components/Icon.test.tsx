@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom';
 import React from 'react';
 import Icon from '../../src/components/Icon';
-import { render } from '../utils/test_utils';
+import { render } from '../utils/test-utils';
 
 describe('test/components/Icon.test.ts', () => {
   test('It should be a render icon', async () => {
